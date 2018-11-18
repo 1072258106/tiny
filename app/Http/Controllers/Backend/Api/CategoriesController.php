@@ -84,8 +84,8 @@ class CategoriesController extends ApiController
         // 更新单页
         $data = $this->validate(
             $request, [
-                'title' => ['nullable', 'string', 'between:1,100'],
-                'content' => ['nullable', 'string'],
+                'title' => ['filled', 'string', 'between:1,100'],
+                'content' => ['filled', 'string'],
                 'attachment_ids' => ['nullable', 'array']
             ]
         );
