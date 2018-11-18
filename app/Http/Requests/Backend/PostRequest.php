@@ -57,9 +57,9 @@ class PostRequest extends Request
             case 'PUT':
             case 'PATCH':
                 return [
-                    'title' => ['nullable', 'string', 'between:1,100'],
+                    'title' => ['filled', 'string', 'between:1,100'],
                     'excerpt' => ['nullable', 'string', 'between:1,512'],
-                    'content' => ['nullable', 'string'],
+                    'content' => ['filled', 'string'],
                     'cover' => ['bail', 'nullable', new ImageName(), new ImageNameExist()],
                     'status' => ['nullable', Rule::in([Post::STATUS_PUBLISH, Post::STATUS_DRAFT])],
                     'type' => ['nullable', Rule::in([Category::TYPE_POST, Category::TYPE_PAGE])],
