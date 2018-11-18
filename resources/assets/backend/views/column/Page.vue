@@ -26,8 +26,13 @@ export default {
   methods: {
     confirm () {
       this.$http.post(`categories/${this.$route.params.id}/page`, mainDiff.diff(this.formData)).then(res => {
+        this.$emit('on-loaded');
+        this.$emit('on-success');
         this.$Message.success(`编辑单页成功`);
         this.$router.push({name: 'columnList'});
+      }).catch(err => {
+        this.$emit('on-loaded');
+        this.errors = err.response.data.errors;
       });
     }
   },
@@ -45,8 +50,6 @@ export default {
         this.title = res.data.meta.cate_name;
       }
       mainDiff.save(this.formData);
-    }).catch(err => {
-      this.errors = err.response.data.errors;
     });
     for (let key in this.formData) {
       this.$watch(`formData.${key}`, () => {
